@@ -13,16 +13,16 @@
 8. npm run dev
 
 # Available backend endpoints:
-A. GET / (Get all)
-B. GET /:id (Get by task ID)
-C. POST / (Post new task)
-D. PATCH / (Update task)
-E. DELETE /:id (Delete task by ID)
+- GET / (Get all)
+- GET /:id (Get by task ID)
+- POST / (Post new task)
+- PATCH / (Update task)
+- DELETE /:id (Delete task by ID)
 
 # Available frontend functions:
-A. Can create new tasks
-B. Can delete current tasks
-C. Can update current tasks
+- Can create new tasks
+- Can delete current tasks
+- Can update current tasks
 
 # Future features:
 - Search function for Tasks (By ID, by title, by due date)
