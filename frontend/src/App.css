@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+html {
+  overflow: hidden;
+}
+
+@theme {
+  --color-navBlack: #1d1d1b;
+}

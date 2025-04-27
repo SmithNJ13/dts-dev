@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: postgres:14
+    container_name: hmcts_tasks
+    ports:
+      - 5432:5432
+    environment: 
+      - POSTGRES_DB=hmcts_tasks
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1z2y3x
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d/:ro
+volumes:
+  dbdata:
+    name: vol_tasks
+    
+# postgres://username:password@localhost:5432/database_name
+# docker compose down --remove-orphans --volumes
