@@ -24,7 +24,12 @@ const TasksPage = () => {
   
       const response = await axios.patch(`http://localhost:5433/`, updatedData);
       console.log("Task updated successfully", response.data);
-      setUpdate(null);
+      setUpdate({
+        title: '',
+        description: '',
+        status: '',
+        dueDate: '01-01-00',
+      });
     } catch (error) {
       console.log(error);
     }
