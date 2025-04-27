@@ -14,15 +14,17 @@ const TasksPage = () => {
 
   async function updateTask(task_id) {
     try {
-      const response = await axios.patch('http://localhost:5433/', {
+      const updatedData = {
         id: task_id,
         title: update.title,
         description: update.description,
         status: update.status,
-        due_date: update.dueDate,
-      });
-      console.log('Task updated successfully', response.data);
-      setUpdate({ title: '', description: '', status: '', dueDate: '' });
+        due_date: update.dueDate ? update.dueDate : tasks.find(task => task.id === task_id).dueDate
+      }
+  
+      const response = await axios.patch(`http://localhost:5433/`, updatedData);
+      console.log("Task updated successfully", response.data);
+      setUpdate(null);
     } catch (error) {
       console.log(error);
     }
@@ -204,8 +206,7 @@ const TasksPage = () => {
               <button
                 onClick={() => handleDelete('no')}
                 className="bg-gray-500 text-white px-4 py-2 rounded border-transparent border-1 hover:border-black hover:cursor-pointer"
-              >
-                No
+              > No
               </button>
             </div>
           </div>
