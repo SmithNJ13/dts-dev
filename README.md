@@ -1,31 +1,28 @@
-## Instalation and usage:
-- git clone and cd into root folder
-- start the database service: docker compose up -d
-- npm install
-- create a .env file (update the values below)
+## Installation and Usage:
+1. Git Clone and cd into root folder
+2. start docker locally and run docker compose up -d
+3. npm install
+4. create .env file on the backend with the following:
+    ```
+    PORT=5433
+    DB_URL=postgres://admin:1z2y3x@localhost:5432/hmcts_tasks
+    ```
+5. cd into backend
+6. npm run start
+7. cd into frontend
+8. npm run dev
 
-```sh
-# .env
-PORT=5433
-DB_URL=postgres://username:password@localhost:5432/database_name
-```
-## To seed the database:
--node ./database/setup.js
--npm run start
+# Available backend endpoints:
+A. GET / (Get all)
+B. GET /:id (Get by task ID)
+C. POST / (Post new task)
+D. PATCH / (Update task)
+E. DELETE /:id (Delete task by ID)
 
-## Available endpoints
-- GET /people/:id
-- GET /wrongs
+# Available frontend functions:
+A. Can create new tasks
+B. Can delete current tasks
+C. Can update current tasks
 
-## Debug flow:
-3000 -> routes -> controllers -> models/DB
-Index = Everything
-, Show = Just one
-, New[form]*
-, Create,
- Edit[form]*
-, Update
-, Destroy
-
-* = we do not need
-
+# Future features:
+- Search function for Tasks (By ID, by title, by due date)
