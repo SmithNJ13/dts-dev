@@ -6,6 +6,7 @@ const TasksPage = () => {
   const [tasks, setTasks] = useState([])
   const [update, setUpdate] = useState(null)
   const [confirm, setConfirm] = useState(false)
+  const [taskID, setTaskID] = useState(0)
 
   async function getTasks() {
     const response = await axios.get("http://localhost:5433/")
@@ -16,17 +17,30 @@ const TasksPage = () => {
   }
 
   async function updateTask(task_id) {
-    const response = await axios.get(`http://localhost:5433/${task_id}`)
-    const data = response.data
-    if(data) {
-      setUpdate(data)
+    try {
+      const response = await axios.patch(`http://localhost:5433/`, {
+        id: task_id,
+        title: update.title,
+        description: update.description,
+        status: update.status,
+        due_date: update.due_date
+      })
+      console.log("Task updated successfully", response.data)
+      setUpdate(null)
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  const handleDelete = (selection) => {
+  async function handleDelete (selection) {
     if(selection == "yes") {
-      console.log("delete logic here.")
-      setConfirm(false)
+      try {
+        const response = await axios.delete(`http://localhost:5433/${taskID}`)
+        console.log("Task deleted")
+        setConfirm(false)
+      } catch (error) {
+        console.log({error: error})
+      }
     }
     if(selection == "no") {
       setConfirm(false)
@@ -34,8 +48,19 @@ const TasksPage = () => {
   }
   
   useEffect(() => {
+    async function getTasks() {
+      try {
+        const response = await axios.get("http://localhost:5433/")
+        const data = response.data
+        if(data) {
+          setTasks(data.Task)
+        }
+      } catch (error) {
+        return {message: error}
+      }
+    }
     getTasks();
-  }, []);
+  }, [confirm]);
   
   return (
   <div className={`flex flex-col h-screen`}>
@@ -47,7 +72,10 @@ const TasksPage = () => {
             <div className="flex flex-row justify-between">
               <h1 className="text-2xl text-center">{task.title}</h1>
               <button className="bg-red-400 rounded-full flex h-6 w-6 text-sm font-bold items-center text-center justify-center p-2 border-transparent border-1 hover:border-black hover:cursor-pointer"
-              onClick={() => setConfirm(true)}>X</button>
+              onClick={() => {
+                setTaskID(task.id)
+                setConfirm(true)
+              }}>X</button>
             </div>
             {task.status == "incomplete" && (
               <p className="text-red-600 text-center font-bold">{task.status}</p>
