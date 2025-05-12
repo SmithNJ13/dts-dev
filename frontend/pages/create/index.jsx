@@ -9,7 +9,7 @@ const CreatePage = () => {
         const Form = new FormData(e.target)
         const title = Form.get("title")
         const description = Form.get("description")
-        const dueDate = Form.get("dueDate")
+        const due_date = Form.get("due_date")
         const date = new Date()
         const postDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
         try {
@@ -23,14 +23,14 @@ const CreatePage = () => {
                     title: title,
                     description: description,
                     postDate: postDate,
-                    dueDate: dueDate,
+                    due_date: due_date,
                     status: "incomplete",
                 })
                 })
             if(!response.ok) {
             console.log("Failed to create task.")
             } else {
-            console.log(title, description, postDate, dueDate, "incomplete")
+            console.log(title, description, postDate, due_date, "incomplete")
             console.log("Task created successfully.")
             e.target.reset()
             nav("/")
@@ -58,9 +58,9 @@ const CreatePage = () => {
         </textarea>
         </div>
         <div className="mb-5">
-        <label htmlFor="dueDate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Due Date:
+        <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Due Date:
         </label>
-        <input type="date" name="dueDate" id="dueDate" required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
+        <input type="date" name="due_date" id="due_date" required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
         </div>
     <button type="submit" className="text-white bg-green-700 hover:bg-green-600 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"> Submit
     </button>
