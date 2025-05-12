@@ -10,7 +10,7 @@ describe("PATCH", () => {
       title: 'Updated Task Title',
       status: 'complete',
       description: 'Updated description',
-      dueDate: '2025-01-01',
+      due_date: '2025-01-01',
     };
 
     const response = await request(app)

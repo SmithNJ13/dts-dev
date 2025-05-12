@@ -7,7 +7,7 @@ const TasksPage = () => {
     title: '',
     description: '',
     status: '',
-    dueDate: '',
+    due_date: '',
   });
   const [confirm, setConfirm] = useState(false);
   const [taskID, setTaskID] = useState(null);
@@ -19,7 +19,7 @@ const TasksPage = () => {
         title: update.title,
         description: update.description,
         status: update.status,
-        due_date: update.dueDate ? update.dueDate : tasks.find(task => task.id === task_id).dueDate
+        due_date: update.due_date ? update.due_date : tasks.find(task => task.id === task_id).due_date
       }
   
       const response = await axios.patch(`http://localhost:5433/`, updatedData);
@@ -28,7 +28,7 @@ const TasksPage = () => {
         title: '',
         description: '',
         status: '',
-        dueDate: '01-01-00',
+        due_date: '01-01-00',
       });
     } catch (error) {
       console.log(error);
@@ -71,7 +71,7 @@ const TasksPage = () => {
       title: task.title,
       description: task.description,
       status: task.status,
-      dueDate: task.dueDate,
+      due_date: task.due_date,
     });
   };
 
@@ -109,7 +109,7 @@ const TasksPage = () => {
                 {task.status}
               </p>
               <p>Posted: {task.postDate}</p>
-              <p className="text-end">Due: {task.dueDate}</p>
+              <p className="text-end">Due: {task.due_date}</p>
               <div className="bg-white flex-1 w-full text-start p-2 overflow-y-scroll max-h-32">
                 <p>{task.description}</p>
               </div>
@@ -174,14 +174,14 @@ const TasksPage = () => {
                 </select>
               </div>
               <div className="mb-5">
-                <label htmlFor="dueDate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label htmlFor="due_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Due Date:
                 </label>
                 <input
-                  id="dueDate"
+                  id="due_date"
                   type="date"
-                  value={update.dueDate.split('T')[0]}
-                  onChange={(e) => setUpdate({ ...update, dueDate: e.target.value })}
+                  value={update.due_date.split('T')[0]}
+                  onChange={(e) => setUpdate({ ...update, due_date: e.target.value })}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
               </div>

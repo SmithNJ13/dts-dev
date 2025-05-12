@@ -6,7 +6,7 @@ class Task {
         this.description = data.description,
         this.status = data.status,
         this.postDate = data.post_date ? data.post_date.toLocaleDateString('en-GB') : null;
-        this.dueDate = data.due_date ? data.due_date.toLocaleDateString('en-GB') : null;
+        this.due_date = data.due_date ? data.due_date.toLocaleDateString('en-GB') : null;
     }
 
     static async getAll() {
@@ -26,15 +26,15 @@ class Task {
         }
     }
 
-    static async create({id, title, description, postDate, dueDate, status}) {
+    static async create({id, title, description, postDate, due_date, status}) {
         const response = await db.query(`
-            INSERT INTO tasks (title, description, post_date, due_date, status) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [title, description, postDate, dueDate, status])
+            INSERT INTO tasks (title, description, post_date, due_date, status) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [title, description, postDate, due_date, status])
             return new Task(response.rows[0])
     }
 
-    static async update({id, title, description, status, dueDate}) {
+    static async update({id, title, description, status, due_date}) {
         const response = await db.query(`
-            UPDATE tasks SET title = $1, description = $2, status = $3, due_date = $4 WHERE task_id = $5 RETURNING *`, [title, description, status, dueDate, id])
+            UPDATE tasks SET title = $1, description = $2, status = $3, due_date = $4 WHERE task_id = $5 RETURNING *`, [title, description, status, due_date, id])
         return response
     }
 
